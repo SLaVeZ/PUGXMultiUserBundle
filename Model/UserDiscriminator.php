@@ -82,6 +82,10 @@ class UserDiscriminator
     public function setClass($class, $persist = false)
     {
         if (!in_array($class, $this->getClasses())) {
+            $class = get_parent_class($class);
+        }
+        
+        if (!in_array($class, $this->getClasses())) {
             throw new \LogicException(sprintf('Impossible to set the class discriminator, because the class "%s" is not present in the entities list', $class));
         }
         
